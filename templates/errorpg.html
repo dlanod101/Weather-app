@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error</title>
+    <style>
+        body {
+            background: rgb(17, 50, 92);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+        }
+        .container {
+            padding: 10px;
+            margin: auto;
+            margin-top: 30vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 28em;
+            height: 30vh;
+            border-radius: 20px;
+            color: white;
+            box-shadow: 0 5px 10px #03080fd8;
+            background-color: rgba(10, 24, 36, 0.74);
+        }
+        h1 {
+            margin-bottom: 0px;
+            margin-top: 0;
+            font-size: 70px;
+            animation: 1s pulse infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                font-size: 70px;
+            }
+            50% {
+                font-size: 90px;
+            }
+            100% {
+                font-size: 70px;
+            }
+        }
+        p {
+            text-align: center;
+            font-variant-emoji:unicode;
+        }
+        a {
+            border: none;
+            background-color: #ffffffe1;
+            border-radius: 10px;  
+            box-shadow: 0 3px 5px #03080fd8; 
+            transition: 100ms linear; 
+            text-decoration: none;
+            padding: 10px;
+            color: rgba(5, 13, 20, 0.938);
+        }
+        a:hover {
+            cursor: pointer;
+            background-color: #367aadf1;
+            color: white;
+            box-shadow: 0 5px 10px #03080fd8;
+        }
+        @media (max-width: 600px) {
+            .container {
+                margin-top: 20vh;
+                width: 80%;
+                height: 30vh;
+                padding: 10px;
+            }
+        }
+        @media (max-width: 350px) {
+            .container {
+                margin-top: 20vh;
+                width: 90%;
+                height: 40vh;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⚠</h1>
+        <p>An Error Occured. Input a valid City/Region/Country Name and Try Again</p>
+    </div>
+    <a href="{{ url_for('home') }}">Return to Home</a>
+</body>
+</html>
