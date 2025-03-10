@@ -1,12 +1,18 @@
 from flask import Flask, request, session, render_template, redirect, url_for
 import requests
+from redis_helper import view_count
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask("__main__")
-app.secret_key = "your_secret_key"
+app.secret_key = os.getenv("SECRET_KEY")
 
 
 @app.route("/", methods=["GET", "POST"])
 def home():
+    view_count()
     if request.method == "POST":
         session["location"] = request.form.get("location")
         return redirect(url_for("result"))
@@ -15,12 +21,13 @@ def home():
 
 @app.route("/weather")
 def result():
+    view_count()
     location = session.get("location", "New York")
 
     BASE_URL = "https://api.weatherapi.com/v1/current.json"
     key = "5fe787d50629440eb7c00938241410"
     q = f"{location}"
-        
+
     url = f"{BASE_URL}?q={q}&key={key}"
     try:
         response = requests.get(url)
@@ -28,8 +35,8 @@ def result():
 
         if "location" not in data or "current" not in data:
             print("Unexpected API response:", data)
-            return redirect(url_for('home'))
-        
+            return redirect(url_for("home"))
+
         city = data["location"]["name"]
         region = data["location"]["region"]
         country = data["location"]["country"]

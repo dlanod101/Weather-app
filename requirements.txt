@@ -1,2 +1,4 @@
 flask
 requests
+upstash_redis
+python-dotenv
