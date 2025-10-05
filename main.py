@@ -1,6 +1,5 @@
 from flask import Flask, request, session, render_template, redirect, url_for
 import requests
-from redis_helper import view_count
 import os
 from dotenv import load_dotenv
 
@@ -12,7 +11,6 @@ app.secret_key = os.getenv("SECRET_KEY")
 
 @app.route("/", methods=["GET", "POST"])
 def home():
-    view_count()
     if request.method == "POST":
         session["location"] = request.form.get("location")
         return redirect(url_for("result"))
@@ -21,7 +19,6 @@ def home():
 
 @app.route("/weather")
 def result():
-    view_count()
     location = session.get("location", "New York")
 
     BASE_URL = "https://api.weatherapi.com/v1/current.json"
